@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: brother-takeaway-gateway
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        # spring-cloud-config的service-id
+        service-id: brother-takeaway-config
+      profile: dev
+
+# 用于启动时寻找eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
