@@ -33,7 +33,8 @@ public class RateFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-        if (rateLimiter.tryAcquire()) {
+        // request没拿到令牌则不予放行
+        if (!rateLimiter.tryAcquire()) {
             RequestContext requestContext = RequestContext.getCurrentContext();
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(HttpStatus.TOO_MANY_REQUESTS.value());
